@@ -1,0 +1,69 @@
+{
+  "identifier" : "8B5C0F9E-PlateWatch-V1",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_compatibilityTimeRate" : 1,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "24000001",
+      "localizations" : [],
+      "name" : "PlateAware Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "7.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "11000001",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Proximity alerts, route scan, offline packs, density score, saved routes.",
+              "displayName" : "PlateAware Pro Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.plateaware.app.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "PlateAware Pro Monthly",
+          "subscriptionGroupID" : "24000001",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "49.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "11000002",
+          "introductoryOffer" : {
+            "internalID" : "12000001",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W",
+            "numberOfPeriods" : 1
+          },
+          "localizations" : [
+            {
+              "description" : "Proximity alerts, route scan, offline packs, density score, saved routes. 7-day free trial.",
+              "displayName" : "PlateAware Pro Annual",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.plateaware.app.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "PlateAware Pro Annual",
+          "subscriptionGroupID" : "24000001",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : { "major" : 3, "minor" : 0 }
+}

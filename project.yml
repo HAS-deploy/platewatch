@@ -1,0 +1,104 @@
+name: PlateWatch
+options:
+  bundleIdPrefix: com.plateaware
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    DEVELOPMENT_TEAM: "NH2XFPC9KN"
+    CODE_SIGN_STYLE: Automatic
+
+packages:
+  PostHog:
+    url: https://github.com/PostHog/posthog-ios
+    from: "3.15.0"
+
+targets:
+  PlateWatch:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: PlateWatch
+        excludes:
+          - "**/.DS_Store"
+    resources:
+      - PlateWatch/Resources/Assets.xcassets
+      - PlateWatch/Resources/PrivacyInfo.xcprivacy
+      - PlateWatch/Resources/Configuration.storekit
+      - PlateWatch/Resources/seed-cameras.json
+    dependencies:
+      - package: PostHog
+        product: PostHog
+      - sdk: StoreKit.framework
+      - sdk: MapKit.framework
+      - sdk: CoreLocation.framework
+      - sdk: AuthenticationServices.framework
+    info:
+      path: PlateWatch/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: PlateAware
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        LSRequiresIPhoneOS: true
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        ITSAppUsesNonExemptEncryption: false
+        NSLocationWhenInUseUsageDescription: "PlateAware uses your location to center the map on roads near you and show nearby public surveillance infrastructure. Used only while the app is open."
+        NSLocationAlwaysAndWhenInUseUsageDescription: "PlateAware uses your location in the background only when you've turned on Camera Ahead alerts, so we can notify you before you reach a known public camera. You can turn this off any time."
+        NSCameraUsageDescription: "PlateAware can attach a photo to a camera report you submit. The camera is only used when you tap the Add Photo button on a report."
+        NSPhotoLibraryUsageDescription: "PlateAware can attach a photo from your library to a camera report you submit. We only access photos you pick."
+        PostHogKey: "phc_zsZ6KoWfgoUyVnJEjKi5KC6CuS66xnyQgradTRmqc52s"
+        PostHogHost: "https://us.i.posthog.com"
+        APIBaseURL: "https://api.plateaware.app"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.plateaware.app
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: YES
+        CURRENT_PROJECT_VERSION: "8"
+        MARKETING_VERSION: "1.0"
+        GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: YES
+        SWIFT_EMIT_LOC_STRINGS: YES
+
+  PlateWatchTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: PlateWatchTests
+    dependencies:
+      - target: PlateWatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.plateaware.app.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  PlateWatch:
+    build:
+      targets:
+        PlateWatch: all
+        PlateWatchTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - PlateWatchTests
+    archive:
+      config: Release

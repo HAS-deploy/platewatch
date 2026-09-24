@@ -1,0 +1,36 @@
+docs/reviewer-demo-credentials.md
+
+# Xcode / SwiftPM build output
+build/
+.build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+xcuserdata/
+*.xcuserstate
+
+# XcodeGen-generated Xcode project (project.yml is the source of truth)
+PlateWatch.xcodeproj/
+
+# SwiftPM
+.swiftpm/
+Package.resolved
+
+# macOS
+.DS_Store
+
+# Signing + private keys — must never land in the repo
+*.p12
+*.p8
+*.mobileprovision
+embedded.mobileprovision
+*.pem
+AuthKey_*.p8
+
+# Local secret / env files
+.env
+.env.*
+*.local
+
+# Temp scratch
+/tmp/
