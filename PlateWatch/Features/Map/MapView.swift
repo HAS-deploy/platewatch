@@ -99,6 +99,21 @@ struct MapView: View {
             PortfolioAnalytics.shared.track(PortfolioEvent.screenViewed,
                                             ["screen": "map"])
         }
+        // Center automatically the first time the user's location becomes
+        // available. Prior to this, `.automatic` was fitting the Cupertino
+        // seed pins so a San Antonio user saw California by default — even
+        // after granting location. This actively drives the camera to the
+        // user's fix once, then respects any manual pan/zoom afterwards.
+        .onChange(of: appState.locationService.currentLocation) { _, loc in
+            guard !hasCenteredOnUser, let loc else { return }
+            cameraPosition = .region(
+                MKCoordinateRegion(
+                    center: loc.coordinate,
+                    span: MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
+                )
+            )
+            hasCenteredOnUser = true
+        }
     }
 
     // MARK: - Derived
