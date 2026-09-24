@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Support — PlateAware</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+         max-width: 760px; margin: 40px auto; padding: 24px; line-height: 1.55;
+         color: #1a1a1a; background: #fff; }
+  h1, h2 { line-height: 1.2; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  h2 { font-size: 20px; margin-top: 32px; }
+  a { color: #c2461d; }
+  .faq dt { font-weight: 600; margin-top: 16px; }
+  .faq dd { margin: 4px 0 0 0; }
+</style>
+</head>
+<body>
+
+<h1>PlateAware — Support</h1>
+<p>
+  PlateAware is a public-roadway infrastructure transparency map: it shows
+  where fixed ALPR, red-light, traffic, toll, and school-zone cameras
+  already exist on public roads, using the DeFlock community map (built on
+  OpenStreetMap) and other open public datasets.
+</p>
+
+<h2>Contact</h2>
+<p>
+  Email: <a href="mailto:support@plateaware.app">support@plateaware.app</a><br>
+  We read every message. Response time is typically within 48 hours.
+</p>
+
+<h2>Common questions</h2>
+<dl class="faq">
+  <dt>Where does PlateAware's camera data come from?</dt>
+  <dd>The pins on the map come from the DeFlock community dataset at
+      <a href="https://maps.deflock.org">maps.deflock.org</a>, which is
+      itself built on OpenStreetMap and distributed under the ODbL open
+      data license. We ingest the dataset on a weekly schedule on our
+      server, then deliver delta updates to your device. A thin US-wide
+      seed dataset ships inside the app so the map works on first launch
+      even before the first sync completes.</dd>
+
+  <dt>Does PlateAware detect police officers or warn me about active
+      enforcement?</dt>
+  <dd>No. PlateAware shows only fixed, permanent infrastructure that is
+      visible from public roads and already documented in open public
+      datasets. It does not detect, identify, locate, or alert on any
+      individual person, including law-enforcement officers. There is no
+      live "police nearby" feature, no officer reporting, and no
+      real-time enforcement detection.</dd>
+
+  <dt>Why is the map mostly empty when I pan to a rural area?</dt>
+  <dd>The underlying open dataset has more coverage in dense urban areas
+      than in rural ones — that reflects real community contributions to
+      OpenStreetMap and DeFlock, not a bug. If you know of a fixed camera
+      that should be on the map, you can submit a report from the
+      Settings tab. Reports enter a moderation queue and are not visible
+      to other users until verified.</dd>
+
+  <dt>How does Camera Ahead work, and why does it need background
+      location?</dt>
+  <dd>Camera Ahead is a premium feature that fires a local notification
+      before you reach a known fixed camera. To do that, iOS needs the
+      "Always" location permission. We request it only the moment you
+      turn the feature on — never at launch. You can turn Camera Ahead
+      off any time in Settings, which immediately stops background
+      location use.</dd>
+
+  <dt>What's the difference between free and Pro?</dt>
+  <dd>Free includes the map, your current location, nearby camera pins,
+      basic camera details, and up to 5 searches per day. PlateAware Pro
+      adds Camera Ahead proximity alerts, pre-drive route scan, offline
+      state packs, advanced filters, density score, saved routes, faster
+      sync, and full report history.</dd>
+
+  <dt>How do I cancel my subscription?</dt>
+  <dd>Open Settings on your iPhone → tap your name at the top →
+      Subscriptions → PlateAware → Cancel. Your subscription stays
+      active until the end of the current period.</dd>
+
+  <dt>How do I restore a previous purchase?</dt>
+  <dd>On the paywall screen tap "Restore Purchases." As long as you're
+      signed in with the same Apple ID that made the original purchase,
+      it will restore automatically.</dd>
+
+  <dt>How do I delete my data?</dt>
+  <dd>Open PlateAware → Settings. If you have not signed in with Apple,
+      tap <strong>Delete All Data</strong> — this wipes the install-trial
+      stamp, onboarding state, and the local entitlement on this device.
+      If you have signed in with Apple, tap <strong>Delete Account</strong>
+      — this clears all PlateAware data on the device and opens Apple's
+      Sign in with Apple manager so you can revoke the grant. No email
+      round-trip is required either way.</dd>
+
+  <dt>Privacy</dt>
+  <dd>See the <a href="./privacy.html">Privacy Policy</a>.</dd>
+
+  <dt>Terms of Use</dt>
+  <dd>See the <a href="./terms.html">Terms of Use</a>.</dd>
+</dl>
+
+<h2>Report a bug</h2>
+<p>
+  Email <a href="mailto:support@plateaware.app">support@plateaware.app</a> with:
+</p>
+<ul>
+  <li>What happened (one sentence)</li>
+  <li>What you expected instead</li>
+  <li>iOS version + device (Settings → General → About)</li>
+  <li>App version (Settings tab inside PlateAware)</li>
+  <li>Screenshot if possible</li>
+</ul>
+
+</body>
+</html>
