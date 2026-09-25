@@ -13,197 +13,105 @@
   h2 { font-size: 20px; margin-top: 32px; }
   .updated { color: #666; font-size: 14px; margin-bottom: 32px; }
   a { color: #c2461d; }
+  .faq dt { font-weight: 600; margin-top: 16px; }
+  .faq dd { margin: 4px 0 0 0; }
 </style>
 </head>
 <body>
 
 <h1>Privacy Policy — PlateAware</h1>
-<p class="updated">Last updated: 2026-06-11</p>
+<p class="updated">Last updated: 2026-09-25</p>
 
 <p>
-  This policy describes what data PlateAware ("the app") collects, stores,
-  and shares. It is written to match the App Store Connect App Privacy
-  nutrition label exactly. If this document and the nutrition label ever
-  disagree, the nutrition label is wrong — let us know at
-  <a href="mailto:support@plateaware.app">support@plateaware.app</a>.
+  This policy describes what data PlateAware ("the app") handles. PlateAware
+  has no user accounts and does not operate its own server. Questions:
+  <a href="mailto:support@medbillresolve.com">support@medbillresolve.com</a>.
 </p>
 
-<h2>What the app collects</h2>
-<p>
-  PlateAware is designed to work without an account and with the minimum
-  data needed to render a public-infrastructure transparency map. Specifically:
-</p>
+<h2>Data stored only on your device</h2>
 <ul>
-  <li><strong>Anonymous device identifier.</strong> On first launch, the
-      app generates a random UUID and stores it in the iOS Keychain. This
-      identifier is not your Apple ID, not your IDFA/IDFV, and is not used
-      for advertising. It is used only to attribute your in-app
-      entitlement, your submitted camera reports, and your PostHog
-      analytics events to the same anonymous installation.</li>
-  <li><strong>Approximate location.</strong> While the map screen is open,
-      PlateAware sends an approximate latitude/longitude to our server
-      with each <code>/v1/cameras/nearby</code> or
-      <code>/v1/cameras/bbox</code> request so we can return camera pins
-      near you. The coordinates are used to compute the response and are
-      not stored in our database beyond the request lifetime.</li>
-  <li><strong>Optional background location (premium "Camera Ahead").</strong>
-      If you turn on the premium <em>Camera Ahead</em> proximity-alert
-      feature, the app reads your location in the background to fire a
-      local notification before you reach a known fixed camera. You can
-      turn this off at any time in PlateAware Settings or in iOS Settings.
-      It is off by default and is never requested at launch.</li>
-  <li><strong>User-submitted camera reports.</strong> If you tap "Submit a
-      Camera Report," you may submit a camera type, an approximate
-      latitude/longitude (defaulting to your current location only if you
-      enable that toggle), an optional photo, and an optional free-text
-      note. Reports enter a moderation queue and are never published to
-      other users until a moderator verifies them. They are linked to your
-      anonymous device identifier (or to your Sign in with Apple identifier
-      if you have signed in).</li>
-  <li><strong>In-app purchase records.</strong> When you start a free
-      trial or purchase a subscription, Apple StoreKit hands us the
-      transaction identifier so we can grant your entitlement. We never
-      see card data, billing address, or your Apple ID password.</li>
-  <li><strong>Sign in with Apple email (optional, premium only).</strong>
-      If you choose to sign in with Apple to sync saved routes across
-      devices, Apple provides a private relay email address that we store
-      server-side. We use it only to contact you about account-deletion
-      requests; we do not market to it.</li>
-  <li><strong>PostHog product analytics.</strong> PlateAware sends
-      anonymized product-analytics events (screen views, feature taps,
-      paywall views) to PostHog in the United States. Events are
-      attributed to the anonymous device identifier described above. We
-      do not send precise location, do not send report contents, and do
-      not use these events for advertising or cross-app tracking.</li>
+  <li>A cache of public camera locations (from a dataset bundled with the app
+      and from the DeFlock public map, see below).</li>
+  <li>Routes you choose to save, your Camera Ahead setting, onboarding state,
+      and other app preferences.</li>
+  <li>Your location. PlateAware uses your location on your device to center
+      the map, show nearby cameras, and fire Camera Ahead alerts. The app does
+      not upload your location to us, and we do not store it.</li>
 </ul>
 
-<h2>What the app stores locally</h2>
+<h2>Anonymous usage analytics (PostHog)</h2>
 <p>
-  PlateAware keeps a local SQLite cache of the public camera dataset on
-  your device so the map can render fast and so an offline state pack
-  (premium) keeps working without a network. Your anonymous device
-  identifier is stored in the iOS Keychain. Your saved routes and your
-  in-app entitlement are stored in the app's local container. Photos you
-  attach to a report are held only until upload succeeds, then released.
+  To understand how the app is used, PlateAware sends product-interaction
+  events to PostHog (us.i.posthog.com), for example: screens viewed,
+  onboarding steps, whether location permission was granted, route-scan mode
+  used, paywall views, and subscription purchase or restore results (product
+  ID, price, and App Store transaction ID). Each event includes the app
+  version, build, device locale, subscription status, and days since install,
+  and is associated with a random identifier generated for this install
+  (after a first purchase, a hashed per-app device identifier). Events do not
+  include your name, email, location coordinates, addresses you enter, or
+  saved routes. As with any internet request, PostHog receives your device's
+  IP address when events are sent. Analytics are not used for advertising or
+  to track you across other companies' apps or websites.
+</p>
+<p>
+  You can turn analytics off at any time in Settings → <em>Anonymous
+  analytics</em>. When it is off, no analytics events are sent.
 </p>
 
-<h2>What the app transmits</h2>
-<p>
-  PlateAware transmits the following over HTTPS:
-</p>
+<h2>Services the app contacts</h2>
 <ul>
-  <li>Approximate latitude/longitude and the anonymous device identifier
-      with each map / route-risk / sync API request to
-      <code>api.platewatch.app</code> (AWS us-east-2, account 139294832887).</li>
-  <li>Camera reports — type, approximate coordinates, optional photo,
-      optional note — to the same API and an associated private S3 bucket.</li>
-  <li>Subscription receipts to Apple StoreKit; the resulting transaction
-      identifier is forwarded to our API for entitlement validation.</li>
-  <li>Anonymized product-analytics events to PostHog
-      (<a href="https://us.i.posthog.com">us.i.posthog.com</a>).</li>
-  <li>If you sign in with Apple, Apple's relay email address is shared
-      with our API once at sign-in.</li>
+  <li><strong>DeFlock public map (overpass.deflock.org).</strong> To load
+      cameras near you, the app requests camera data for a rectangular map
+      area around your current location. The request contains the map area
+      only, with no account or identifier. DeFlock's data comes from
+      <a href="https://www.openstreetmap.org">OpenStreetMap</a> (ODbL).</li>
+  <li><strong>Apple Maps.</strong> Addresses you type for directions are sent
+      to Apple to find places and calculate routes, under
+      <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</li>
+  <li><strong>Apple App Store (StoreKit).</strong> Handles subscription
+      purchases and restores. We never see your payment details.</li>
+  <li><strong>PostHog.</strong> Anonymous usage analytics as described above
+      (<a href="https://posthog.com/privacy">PostHog privacy</a>).</li>
 </ul>
 <p>
-  PlateAware does not send data to advertising networks, data brokers, or
-  any party other than the services listed below.
+  PlateAware does not use advertising networks, ad identifiers (IDFA), App
+  Tracking Transparency, or data brokers, and does not sell data.
 </p>
 
-<h2>Third-party services</h2>
+<h2>Permissions</h2>
 <ul>
-  <li><strong>Apple StoreKit and Sign in with Apple.</strong> Used for
-      subscription purchase, restore, and optional authentication. Apple's
-      privacy policy applies:
-      <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a>.</li>
-  <li><strong>Amazon Web Services (AWS).</strong> Our API runs on AWS
-      Lambda + DynamoDB + S3 in the us-east-2 region. AWS acts as our
-      data processor. Privacy:
-      <a href="https://aws.amazon.com/privacy/">aws.amazon.com/privacy</a>.</li>
-  <li><strong>PostHog.</strong> Anonymized product analytics, US cloud
-      host. PostHog acts as our data processor under its standard DPA.
-      Privacy:
-      <a href="https://posthog.com/privacy">posthog.com/privacy</a>.</li>
-  <li><strong>DeFlock community dataset (built on OpenStreetMap).</strong>
-      The camera locations PlateAware displays come from the DeFlock
-      community map at
-      <a href="https://maps.deflock.org">maps.deflock.org</a>, which is
-      itself built on OpenStreetMap and distributed under the
-      <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>. We
-      ingest the dataset on a weekly schedule on our server; the iOS app
-      does not contact DeFlock or OpenStreetMap directly at runtime.</li>
+  <li><strong>Location — While Using the App.</strong> Centers the map near
+      you and loads nearby cameras. If you decline, the map opens at a default
+      region and you can pan manually.</li>
+  <li><strong>Location — Always</strong> and <strong>Notifications.</strong>
+      Requested only if you turn on the Pro Camera Ahead alerts in Settings.
+      iOS monitors areas around nearby known cameras and PlateAware shows a
+      local notification when you approach one. Turn it off any time in
+      Settings.</li>
 </ul>
-<p>
-  PlateAware does not use any third-party advertising network, attribution
-  network, ad-ID provider, or data broker.
-</p>
-
-<h2>Permissions we request</h2>
-<ul>
-  <li><strong>Location — While Using the App.</strong> Requested when you
-      open the map so we can center it on roads near you and return
-      nearby cameras. If you decline, the map opens at a default region
-      and you can pan manually.</li>
-  <li><strong>Location — Always.</strong> Requested only after you
-      explicitly turn on the premium <em>Camera Ahead</em> proximity
-      alerts in Settings. Used only to fire a local notification before
-      you reach a known fixed camera. You can revoke it any time.</li>
-  <li><strong>Camera.</strong> Requested only when you tap "Add Photo"
-      on a camera-report submission form. Used to capture a photo to
-      attach to your report.</li>
-  <li><strong>Photo Library.</strong> Requested only when you tap
-      "Choose from Library" on a camera-report submission form. We only
-      access the photo you pick.</li>
-</ul>
-<p>
-  PlateAware does not request microphone, contacts, HealthKit, motion,
-  Bluetooth, Face ID, App Tracking Transparency, or remote push
-  notifications. Local notifications are used only for the optional
-  <em>Camera Ahead</em> alerts and require no separate permission beyond
-  iOS notification settings.
-</p>
+<p>PlateAware does not access your camera, photos, contacts, or microphone.</p>
 
 <h2>Your controls</h2>
 <ul>
-  <li>Revoke any permission in iOS Settings → PlateAware at any time.</li>
-  <li>Uninstall the app to remove all locally-stored data.</li>
-  <li><strong>Delete All Data</strong> (anonymous users): Settings →
-      Delete All Data wipes the install-trial stamp, onboarding state, and
-      the local entitlement on this device. This is reachable in two taps
-      from the main map view.</li>
-  <li><strong>Delete Account</strong> (Sign in with Apple users):
-      Settings → Delete Account clears all PlateAware data on the device
-      and opens Apple's Sign in with Apple manager
-      (<code>https://appleid.apple.com/account/manage</code>) so you can
-      revoke the grant directly via Apple's UI. Full server-side row wipe
-      via authenticated <code>DELETE /v1/account</code> + Apple-side
-      <code>auth/revoke</code> lands in API v1.1. No email round-trip
-      required.</li>
-  <li>Contact us at
-      <a href="mailto:support@plateaware.app">support@plateaware.app</a>
-      to request any data we hold or to ask a question about this policy.</li>
+  <li>Settings → <em>Delete All Data</em> deletes your saved routes, Camera
+      Ahead settings, and app preferences on this device.</li>
+  <li>Revoke permissions in iOS Settings → PlateAware; uninstalling removes
+      all app data from the device.</li>
+  <li>To ask about analytics data associated with your install, email
+      <a href="mailto:support@medbillresolve.com">support@medbillresolve.com</a>.</li>
 </ul>
 
 <h2>Children</h2>
-<p>
-  PlateAware is not directed at children under 13. We do not knowingly
-  collect personal information from children under 13. If you believe a
-  child has used the app and entered personal data, contact us and we'll
-  delete it.
-</p>
+<p>PlateAware is not directed at children under 13 and does not knowingly
+collect personal information from children.</p>
 
 <h2>Changes</h2>
-<p>
-  We'll update this page when the data we collect changes. The "Last
-  updated" date at the top reflects the most recent change. Material changes
-  (new data types, new third-party services) will also prompt an in-app
-  notice on next launch.
-</p>
+<p>We will update this page if the app's data practices change; the date at
+the top reflects the latest change.</p>
 
 <h2>Contact</h2>
-<p>
-  PlateAware is published by Tony McMurtrey. Email:
-  <a href="mailto:support@plateaware.app">support@plateaware.app</a>.
-</p>
-
+<p>PlateAware is published by Tony McMurtrey. Email:
+<a href="mailto:support@medbillresolve.com">support@medbillresolve.com</a>.</p>
 </body>
 </html>
